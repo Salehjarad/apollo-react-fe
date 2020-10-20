@@ -1,0 +1,10 @@
+mutation Register($username: String!, $email: String!) {
+  createOneUser(data: {
+    username: $username,
+    email: $email
+  }) {
+    id
+    username
+    email
+  }
+}
