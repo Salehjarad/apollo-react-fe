@@ -106,6 +106,7 @@ const AddForm: React.FC<{}> = (props) => {
   const [errorApi, setErrorApi] = React.useState("");
   const [scanInfo, setScanInfo] = React.useState("");
   const [scanProgress, setScanProgress] = React.useState(0);
+  const [previewPdf, setPrviewPdf] = React.useState<any>();
   const [showProgress, setShowProgress] = React.useState(false);
   const [pdfFile, setPdfFile]: any = useState(null);
 
@@ -152,9 +153,15 @@ const AddForm: React.FC<{}> = (props) => {
         }
         case state === "done": {
           setScanProgress(100);
+
           const newBlobPdf = new Blob(buffers, { type: "application/pdf" });
+          setPrviewPdf(URL.createObjectURL(newBlobPdf));
+
           const newFile = new File([newBlobPdf], "helloworldnow.pdf");
           setPdfFile(newFile);
+
+          console.log("[pdf url]", previewPdf);
+          // URL.revokeObjectURL(previewPdf);
           return setShowProgress(false);
         }
         default:
@@ -313,6 +320,17 @@ const AddForm: React.FC<{}> = (props) => {
                       <Typography variant="body2" dir="rtl">
                         {scanInfo}
                       </Typography>
+                      {previewPdf?.length > 0 && (
+                        <Grid item>
+                          <iframe
+                            src={previewPdf}
+                            title="preview"
+                            width={200}
+                            height={250}
+                            frameBorder={0}
+                          />
+                        </Grid>
+                      )}
                       {showProgress && (
                         <LinearProgress
                           dir="ltr"
