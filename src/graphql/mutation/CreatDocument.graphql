@@ -1,0 +1,37 @@
+
+type TagInput {
+    value: [String]
+}
+
+mutation CreateDocument(
+    $content: String!,
+    $doc_date: String!,
+    $doc_type: String!,
+    $doc_number: String!,
+    $userId: Int!,
+    $file: Upload
+    $hashtag: TagInput
+) {
+  createDocument(
+    content: $content,
+    doc_date: $doc_date,
+    doc_type: $doc_type,
+    doc_number: $doc_number,
+    userId: $userId,
+    file: $file
+    hashtag: $hashtag
+  ) {
+    id
+    content
+    doc_date
+    doc_type
+    doc_number
+    file_url
+    user {
+      username
+    }
+    tags {
+      value
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { createUploadLink } from 'apollo-upload-client';
 
 
 const link = createUploadLink({
-    uri: 'http://localhost:9090/graphql'
+    uri: 'http://localhost:9090/api/v1'
 })
 
 

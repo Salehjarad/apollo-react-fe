@@ -1,0 +1,11 @@
+mutation addAtachment($docId: Int!, $file: Upload!) {
+  addAttachment(docId: $docId, file: $file) {
+    id
+    file_url
+    doc {
+      id
+      content
+      doc_number
+    }
+  }
+}
